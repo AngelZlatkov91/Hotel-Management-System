@@ -3,6 +3,8 @@ package Gateway.validation.Gateway.validation.Service;
 import Gateway.validation.Gateway.validation.DTOS.LoginResponseDTO;
 import Gateway.validation.Gateway.validation.DTOS.UserLoginDTO;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -17,8 +19,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponseDTO login(UserLoginDTO userLoginDTO) {
-        return restClient.get().uri("http://localhost:8081/api/user/login")
-                .retrieve()
-                .body(new ParameterizedTypeReference<LoginResponseDTO>() {});
-    }
+        RestClient.ResponseSpec retrieve = restClient
+                .post()
+                .uri("http://localhost:8081/api/user/login")
+                .body(userLoginDTO)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve();
+
+        ResponseEntity<LoginResponseDTO> body = retrieve.toEntity(LoginResponseDTO.class);
+        System.out.println();
+
+        return null;
+  }
 }

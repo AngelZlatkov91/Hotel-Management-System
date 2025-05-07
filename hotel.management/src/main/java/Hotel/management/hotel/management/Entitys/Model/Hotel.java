@@ -2,6 +2,9 @@ package Hotel.management.hotel.management.Entitys.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name= "hotels")
 public class Hotel {
@@ -24,21 +27,12 @@ public class Hotel {
     private String description;
     @ManyToOne
     private User user;
-
+    @OneToMany
+    private List<Images> images;
     public Hotel() {
+        this.images = new ArrayList();
     }
 
-    public Hotel(String address, String city, String description, String email, Long id, String name, String phone, int stars, User user) {
-        this.address = address;
-        this.city = city;
-        this.description = description;
-        this.email = email;
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.stars = stars;
-        this.user = user;
-    }
 
     public String getAddress() {
         return address;
@@ -110,5 +104,13 @@ public class Hotel {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 }

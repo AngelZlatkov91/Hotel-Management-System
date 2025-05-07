@@ -23,10 +23,11 @@ public class CreateHotelDTO {
     @UniqueHotelEmail
     private String email;
     @Positive
-    @Size(min = 1,max = 5)
     private int stars;
     @NotBlank
     private String description;
+    @NotBlank
+    private String image;
 
     public CreateHotelDTO() {
     }
@@ -85,5 +86,13 @@ public class CreateHotelDTO {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -9,8 +9,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
     private String role;
     @Column(nullable = false, unique = true)
     private String email;
@@ -18,9 +16,9 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String role, String email) {
+    public User(Long id, String role, String email) {
         this.id = id;
-        this.name = name;
+
         this.role = role;
         this.email = email;
     }
@@ -33,13 +31,7 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getRole() {
         return role;

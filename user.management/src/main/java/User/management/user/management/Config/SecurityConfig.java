@@ -28,11 +28,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final RSAKey rsaKey = Jwks.generateRsa();
+    private final RSAKey rsaKey;
 
 
 
-    public SecurityConfig() {}
+    public SecurityConfig(RSAKey rsaKey) {
+        this.rsaKey = rsaKey;
+    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(JwtDecoder jwtDecoder) {
@@ -45,6 +47,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/.well-known/jwks.json").permitAll()
                         .requestMatchers( "/api/user/register").permitAll()
                         .requestMatchers( "/api/user/login").permitAll()
                         .requestMatchers("/api/home").hasRole("ADMIN")

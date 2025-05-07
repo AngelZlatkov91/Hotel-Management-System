@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Constraint(validatedBy = UniqueHotelEmailValidator.class)
 public @interface UniqueHotelEmail {
-    String message() default "The user email should be unique";
+    String message() default "The hotel email should be unique";
     Class<?>[] groups()default {};
 
     Class<? extends Payload>[] payload() default {};

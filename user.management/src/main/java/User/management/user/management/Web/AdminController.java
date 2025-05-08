@@ -26,13 +26,15 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<String> changeProfile(@RequestBody UserChangeRoleDTO userChangeRoleDTO, Authentication authentication) {
-        adminService.changeProfile(userChangeRoleDTO);
+    public ResponseEntity<String> changeProfile(@RequestBody UserChangeRoleDTO userChangeRoleDTO) {
+        adminService.changeProfileRole(userChangeRoleDTO);
         return ResponseEntity.ok("Profile changed");
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteProfile(@RequestBody Long id, Authentication authentication) {
+
+
+    @DeleteMapping("/id")
+    public ResponseEntity<String> deleteProfile(@RequestBody Long id) {
         adminService.deleteProfile(id);
         return ResponseEntity.ok("Profile deleted");
     }

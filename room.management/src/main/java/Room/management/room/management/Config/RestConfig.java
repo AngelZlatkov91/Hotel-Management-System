@@ -1,4 +1,4 @@
-package Hotel.management.hotel.management.Config;
+package Room.management.room.management.Config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

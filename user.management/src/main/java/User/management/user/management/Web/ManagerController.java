@@ -27,11 +27,11 @@ public class ManagerController {
 
     @PostMapping
     public ResponseEntity<String> changeProfile(@RequestBody UserChangeRoleDTO userChangeRoleDTO, Authentication authentication) {
-        managerService.changeProfile(userChangeRoleDTO);
+        managerService.changeProfileRole(userChangeRoleDTO);
         return ResponseEntity.ok("Profile changed");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/id")
     public ResponseEntity<String> deleteProfile(@RequestBody Long id, Authentication authentication) {
         managerService.deleteProfile(id);
         return ResponseEntity.ok("Profile deleted");

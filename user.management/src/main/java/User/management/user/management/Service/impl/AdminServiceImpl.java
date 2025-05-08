@@ -6,6 +6,7 @@ import User.management.user.management.Models.Entitys.User;
 import User.management.user.management.Repositories.UserRepository;
 import User.management.user.management.Service.Interfaces.AdminService;
 import jakarta.transaction.Transactional;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void changeProfile(UserChangeRoleDTO userChangeRoleDTO) {
+    public void changeProfileRole(UserChangeRoleDTO userChangeRoleDTO) {
         Optional<User> byEmail = userRepository.findByEmail(userChangeRoleDTO.getEmail());
         if (byEmail.isPresent()) {
             userChangeRoleDTO.getRole();

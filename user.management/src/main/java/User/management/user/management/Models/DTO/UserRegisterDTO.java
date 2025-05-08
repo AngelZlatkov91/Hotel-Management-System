@@ -3,14 +3,14 @@ package User.management.user.management.Models.DTO;
 import User.management.user.management.Validation.PasswordMatch;
 import User.management.user.management.Validation.UniqueUserEmail;
 import User.management.user.management.Validation.UniqueUserPhone;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 @PasswordMatch(first = "password",
 second = "confirmPassword")
 public class UserRegisterDTO {
     @NotBlank
     @UniqueUserEmail
+    @Email
     private  String email;
     @NotBlank
     private String username;

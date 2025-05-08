@@ -21,15 +21,7 @@ public class UserRegisterController {
     public UserRegisterController(UserService userService) {
         this.userService = userService;
     }
-    @ModelAttribute("userRegistrationDTO")
-    public UserRegisterDTO initForm(){
-        return new UserRegisterDTO();
-    }
 
-    @GetMapping("/register")
-    public ModelAndView register() {
-        return new ModelAndView ("register");
-    }
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody @Valid UserRegisterDTO userRegistrationDTO ,

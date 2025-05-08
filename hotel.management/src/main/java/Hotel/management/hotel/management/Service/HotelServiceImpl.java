@@ -54,16 +54,8 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public void createHotel(CreateHotelDTO dto, String email, String role) {
-
-        if (userRepositories.findByEmail(email).isEmpty()) {
-            User newUser = new User();
-            newUser.setEmail(email);
-            newUser.setRole(role);
-            userRepositories.save(newUser);
-        }
+    public void createHotel(CreateHotelDTO dto, String email) {
         Optional<User> byEmail = userRepositories.findByEmail(email);
-
         Hotel hotel = mapToCreate(dto);
         hotel.setUser(byEmail.orElse(new User()));
         hotelRepositories.save(hotel);

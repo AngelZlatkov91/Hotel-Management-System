@@ -4,6 +4,7 @@ import Hotel.management.hotel.management.Entitys.DTO.CreateHotelDTO;
 import Hotel.management.hotel.management.Entitys.DTO.DetailHotelDTO;
 import Hotel.management.hotel.management.Entitys.DTO.UpdateHotelDTO;
 import Hotel.management.hotel.management.Service.HotelService;
+import Hotel.management.hotel.management.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,48 +24,38 @@ public class ManagerController {
 
 
     private final HotelService hotelService;
+    private final UserService userService;
 
-    public ManagerController(HotelService hotelService) {
+    public ManagerController(HotelService hotelService, UserService userService) {
         this.hotelService = hotelService;
+        this.userService = userService;
     }
-
-
-    @GetMapping("/me")
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_MANAGER')")
-    public ResponseEntity<String> currentUser(@AuthenticationPrincipal Jwt jwt) {
-        String username = jwt.getSubject();
-        Map<String, Object> claims =
-                jwt.getClaims();
-        String scope = (String) claims.get("scope");
-        return ResponseEntity.ok("Hello " + username + " with " + scope);
-    }
-
 
 
     @PostMapping("/create")
     public ResponseEntity<String> createHotel(@RequestBody @Valid CreateHotelDTO createHotel, Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String role = authorities.toString();
-        hotelService.createHotel(createHotel, authentication.getName(), role);
+        userService.addUserForCreateHotel(authentication.getName(), role);
+        hotelService.createHotel(createHotel,authentication.getName());
         return ResponseEntity.ok("Hotel created successfully");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<DetailHotelDTO> updateHotel(@RequestParam Long id, Authentication authentication, UpdateHotelDTO updateHotel ) {
+    public ResponseEntity<DetailHotelDTO> updateHotel(@PathVariable Long id, Authentication authentication, UpdateHotelDTO updateHotel ) {
         String name = authentication.getName();
         DetailHotelDTO update = hotelService.update(id, updateHotel, name);
         return ResponseEntity.ok(update);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteHotel(@RequestParam Long id, Authentication authentication) {
+    public ResponseEntity<String> deleteHotel(@PathVariable Long id, Authentication authentication) {
         String name = authentication.getName();
         hotelService.deleteHotelById(id, name);
         return ResponseEntity.ok("Hotel deleted successfully");
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_MANAGER')")
     public ResponseEntity<List<DetailHotelDTO>> getAllHotels(Authentication authentication) {
         List<DetailHotelDTO> allByManager = hotelService.getAllByManager(authentication.getName());
         return ResponseEntity.ok(allByManager);

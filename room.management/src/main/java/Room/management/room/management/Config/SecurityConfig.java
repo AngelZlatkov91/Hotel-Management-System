@@ -1,17 +1,12 @@
-package Hotel.management.hotel.management.Config;
+package Room.management.room.management.Config;
 
-import com.fasterxml.jackson.databind.util.Converter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -24,8 +19,8 @@ public class SecurityConfig {
             http
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/api/hotels/**").permitAll()
-                            .requestMatchers("/api/hotel/manager/**").hasRole("MANAGER")
+                            .requestMatchers("/api/rooms/**").permitAll()
+                            .requestMatchers("/api/rooms/manager/**").hasRole("MANAGER")
 
                             .anyRequest().authenticated()
                     )

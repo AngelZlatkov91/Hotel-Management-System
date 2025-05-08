@@ -8,7 +8,7 @@ import java.util.List;
 public interface ManagerService {
     List<UserDetailsDTO> getAllUsers(String email);
 
-    void changeProfile(UserChangeRoleDTO userChangeRoleDTO);
+    void changeProfileRole(UserChangeRoleDTO userChangeRoleDTO);
 
     void deleteProfile(Long id);
 }

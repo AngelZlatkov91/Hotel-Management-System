@@ -50,14 +50,12 @@ public class SecurityConfig {
                         .requestMatchers("/.well-known/jwks.json").permitAll()
                         .requestMatchers( "/api/user/register").permitAll()
                         .requestMatchers( "/api/user/login").permitAll()
-                        .requestMatchers("/api/home").hasRole("ADMIN")
                         .requestMatchers("/api/change/manager").hasRole("ADMIN")
                         .requestMatchers("/api/change/receptionist").hasRole("MANAGER")
-
                         .anyRequest().authenticated()
 
-                ) .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout((logout) -> logout.permitAll());
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

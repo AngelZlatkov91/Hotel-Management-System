@@ -14,7 +14,7 @@ public interface HotelService {
 
     void deleteHotelById(Long id , String email);
 
-    void createHotel (CreateHotelDTO dto , String email, String role);
+    void createHotel (CreateHotelDTO dto , String email);
 
     DetailHotelDTO update(Long id, UpdateHotelDTO updateHotel, String name);
 

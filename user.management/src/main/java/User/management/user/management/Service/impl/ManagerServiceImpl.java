@@ -28,10 +28,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional
-    public void changeProfile(UserChangeRoleDTO userChangeRoleDTO) {
+    public void changeProfileRole(UserChangeRoleDTO userChangeRoleDTO) {
         Optional<User> byEmail = userRepository.findByEmail(userChangeRoleDTO.getEmail());
         if (byEmail.isPresent()) {
-            userChangeRoleDTO.getRole();
             byEmail.get().setRole(userChangeRoleDTO.getRole());
             userRepository.save(byEmail.get());
         }

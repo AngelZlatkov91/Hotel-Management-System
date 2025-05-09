@@ -18,16 +18,19 @@ public class ManagerController {
 
     @PostMapping
     public ResponseEntity<String>addRoom(@RequestBody CreateRoomDTO room, Authentication authentication) {
+        roomService.createRoom(room);
         return ResponseEntity.ok("Successfully added room");
     }
 
     @PutMapping
-    public ResponseEntity<String> updateRoom(@RequestBody CreateRoomDTO room, Authentication authentication) {
-        return ResponseEntity.ok("Successfully updated room");
+    public ResponseEntity<String> updateRoom(@PathVariable Long id,@RequestBody CreateRoomDTO room, Authentication authentication) {
+      roomService.updateRoom(id, room);
+      return ResponseEntity.ok("Successfully updated room");
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteRoom(@PathVariable Long id) {
+        roomService.deleteRoom(id);
         return ResponseEntity.ok("Successfully deleted room");
     }
 

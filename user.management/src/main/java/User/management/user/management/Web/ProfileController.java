@@ -26,7 +26,7 @@ public class ProfileController {
 
         UserDetailsDTO userDetails = profileService.getUserDetails(authentication.getName());
 
-        return new ResponseEntity<>(userDetails, HttpStatus.OK);
+        return ResponseEntity.ok(userDetails);
 
     }
 

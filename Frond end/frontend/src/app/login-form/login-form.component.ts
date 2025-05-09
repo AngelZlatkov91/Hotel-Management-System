@@ -11,10 +11,12 @@ export class LoginFormComponent {
   @Output() onSubmitRegisterEvent = new EventEmitter();
 
 	active: string = "login";
-  firstName: string = "";
-  lastName: string = "";
-  login: string = "";
+  username: string = "";
+  phone: string = "";
+  email: string = "";
+  age: number = 0;
   password: string = "";
+  confirmPassword: string = "";
 
 	onLoginTab(): void {
 		this.active = "login";
@@ -25,11 +27,24 @@ export class LoginFormComponent {
 	}
 
   onSubmitLogin(): void {
-    this.onSubmitLoginEvent.emit({"login": this.login, "password": this.password});
+    if (!this.email || !this.password ) {
+      return;
+    }
+    this.onSubmitLoginEvent.emit({"email": this.email, "password": this.password});
   }
 
   onSubmitRegister(): void {
-    this.onSubmitRegisterEvent.emit({"firstName": this.firstName, "lastName": this.lastName, "login": this.login, "password": this.password});
+    if (this.password !== this.confirmPassword) {
+      return;
+    }
+    this.onSubmitRegisterEvent.emit({
+      "username": this.username,
+       "phone": this.phone, 
+       "email": this.email,
+        "password": this.password ,
+        "confirmPassword": this.confirmPassword,
+        "age": this.age
+    });
   }
 
 }

@@ -18,9 +18,9 @@ export class ContentComponent {
 	onLogin(input: any): void {
 		this.axiosService.request(
 		    "POST",
-		    "/login",
+		    "http://localhost:8080/api/user/login",
 		    {
-		        login: input.login,
+		        email: input.email,
 		        password: input.password
 		    }).then(
 		    response => {
@@ -38,12 +38,14 @@ export class ContentComponent {
 	onRegister(input: any): void {
 		this.axiosService.request(
 		    "POST",
-		    "/register",
+		    "http://localhost:8080/api/user/register",
 		    {
-		        firstName: input.firstName,
-		        lastName: input.lastName,
-		        login: input.login,
-		        password: input.password
+				email: input.email,
+		        username: input.username,
+		        phone: input.phone,
+		        age: input.age,
+		        password: input.password,
+				confirmPassword: input.confirmPassword
 		    }).then(
 		    response => {
 		        this.axiosService.setAuthToken(response.data.token);

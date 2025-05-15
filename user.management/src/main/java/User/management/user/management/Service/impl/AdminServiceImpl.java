@@ -7,6 +7,7 @@ import User.management.user.management.Repositories.UserRepository;
 import User.management.user.management.Service.Interfaces.AdminService;
 import jakarta.transaction.Transactional;
 import org.apache.kafka.common.protocol.types.Field;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-    public AdminServiceImpl(UserRepository userRepository) {
+    public AdminServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
     @Override
     public List<UserDetailsDTO> getAllUsers(String email) {
@@ -47,13 +50,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     private UserDetailsDTO mapTo(User user) {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setEmail(user.getEmail());
-        userDetailsDTO.setUsername(user.getUsername());
-        userDetailsDTO.setPhone(user.getPhone());
-        userDetailsDTO.setAge(user.getAge());
-        userDetailsDTO.setRole(user.getRole().toString());
-        userDetailsDTO.setId(user.getId());
-        return userDetailsDTO;
+        return modelMapper.map(user, UserDetailsDTO.class);
     }
 }

@@ -11,6 +11,9 @@ public class Images {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String imageUrl;
+    @ManyToOne
+    private Room roomId;
+
     public Images() {}
 
     public Long getId() {
@@ -27,5 +30,13 @@ public class Images {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Room getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Room roomId) {
+        this.roomId = roomId;
     }
 }

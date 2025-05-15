@@ -17,10 +17,10 @@ public class ReceptionistController {
         this.roomService = roomService;
     }
 
-    @PutMapping
-    public ResponseEntity<String> availableRoom(@PathVariable boolean available) {
-
-        return ResponseEntity.ok("Available room: " + available);
+    @PutMapping("/room/available/{id}")
+    public ResponseEntity<String> availableRoom(@PathVariable Long id) {
+     String room =  roomService.setAvailable(id);
+        return ResponseEntity.ok("Available room: " + room);
     }
 
 }

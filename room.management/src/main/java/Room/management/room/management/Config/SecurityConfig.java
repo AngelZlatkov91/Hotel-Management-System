@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
@@ -22,7 +21,8 @@ public class SecurityConfig {
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/api/rooms/**").permitAll()
-                            .requestMatchers("/api/rooms/manager/**").hasRole("MANAGER")
+                            .requestMatchers("/api/manager/rooms/**").hasRole("MANAGER")
+                            .requestMatchers("/api/receptionist/**").hasRole("RECEPTIONIST")
 
                             .anyRequest().authenticated()
                     )

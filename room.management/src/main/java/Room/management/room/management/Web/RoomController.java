@@ -1,7 +1,4 @@
 package Room.management.room.management.Web;
-
-
-import Room.management.room.management.Models.DTO.CreateRoomDTO;
 import Room.management.room.management.Models.DTO.DetailsRoomDTO;
 import Room.management.room.management.Service.RoomService;
 import org.springframework.http.ResponseEntity;
@@ -22,24 +19,19 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<DetailsRoomDTO>> getAllByHotel (String hotel) {
-
-
-        return ResponseEntity.ok(List.of());
+    @GetMapping("/byHotel/{id}")
+    public ResponseEntity<List<DetailsRoomDTO>> getAllByHotel (@PathVariable Long id) {
+        return ResponseEntity.ok(roomService.getAllRooms(id));
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<DetailsRoomDTO> getAllRoomByID (@PathVariable Long id) {
-        DetailsRoomDTO roomById = roomService.getRoomById(id);
-        return ResponseEntity.ok(roomById);
+        return ResponseEntity.ok(roomService.getRoomById(id));
     }
 
-    @GetMapping("/available")
-    public ResponseEntity<List<DetailsRoomDTO>> getAllByHotelByAvailable (String hotel) {
-        List<DetailsRoomDTO> allRooms =
-                roomService.getAllRooms();
-        return ResponseEntity.ok(List.of());
+    @GetMapping("/available/{id}")
+    public ResponseEntity<List<DetailsRoomDTO>> getAllByHotelByAvailable (@PathVariable Long id) {
+        return ResponseEntity.ok(roomService.getAvailableRooms(id));
     }
 
 }

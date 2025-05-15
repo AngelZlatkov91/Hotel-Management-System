@@ -20,4 +20,5 @@ public interface HotelRepositories extends JpaRepository<Hotel , Long> {
     Optional<Hotel> findByPhone(String  phone);
 
     List<Hotel> findAllByUser(User user);
+
 }

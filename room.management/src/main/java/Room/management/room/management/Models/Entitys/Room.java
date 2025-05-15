@@ -10,12 +10,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "rooms")
-public class Room {
+public class Room extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String roomNumber;
     @Column(nullable = false)
     private String type;
@@ -40,6 +37,9 @@ public class Room {
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column(nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @ManyToOne
+    private UserManager userManager;
 
     public Room() {
         this.images = new ArrayList<>();
@@ -95,13 +95,7 @@ public class Room {
         this.hotelId = hotelId;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public BigDecimal getPricePerNight() {
         return pricePerNight;
@@ -149,5 +143,13 @@ public class Room {
 
     public void setImages(List<Images> images) {
         this.images = images;
+    }
+
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }

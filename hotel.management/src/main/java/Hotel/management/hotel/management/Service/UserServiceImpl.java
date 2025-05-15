@@ -14,10 +14,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserForCreateHotel(String name, String role) {
-        if (userRepositories.findByEmail(name).isEmpty()) {
+    public void addUserForCreateHotel(String email, String role) {
+        if (userRepositories.findByEmail(email).isEmpty()) {
             User newUser = new User();
-            newUser.setEmail(name);
+            newUser.setEmail(email);
             newUser.setRole(role);
             userRepositories.save(newUser);
         }

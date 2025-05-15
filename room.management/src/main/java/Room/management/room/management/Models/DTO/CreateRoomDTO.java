@@ -5,7 +5,7 @@ import Room.management.room.management.Models.RoomStatus;
 import java.math.BigDecimal;
 
 public class CreateRoomDTO {
-    private Long id;
+
     private String roomNumber;
     private String type;
     private int capacity;
@@ -59,13 +59,6 @@ public class CreateRoomDTO {
         this.hotelId = hotelId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public BigDecimal getPricePerNight() {
         return pricePerNight;

@@ -7,6 +7,7 @@ import User.management.user.management.Models.Enum.Role;
 import User.management.user.management.Repositories.UserRepository;
 import User.management.user.management.Service.Interfaces.ManagerService;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class ManagerServiceImpl implements ManagerService {
 
     private  final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-    public ManagerServiceImpl(UserRepository userRepository) {
+    public ManagerServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -43,13 +46,6 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     private UserDetailsDTO mapTo(User user) {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setEmail(user.getEmail());
-        userDetailsDTO.setUsername(user.getUsername());
-        userDetailsDTO.setPhone(user.getPhone());
-        userDetailsDTO.setAge(user.getAge());
-        userDetailsDTO.setRole(user.getRole().toString());
-        userDetailsDTO.setId(user.getId());
-        return userDetailsDTO;
+        return modelMapper.map(user, UserDetailsDTO.class);
     }
 }

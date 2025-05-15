@@ -4,6 +4,7 @@ import Hotel.management.hotel.management.Entitys.DTO.DetailHotelDTO;
 import Hotel.management.hotel.management.Entitys.DTO.UpdateHotelDTO;
 import Hotel.management.hotel.management.Entitys.Model.Hotel;
 import Hotel.management.hotel.management.Entitys.Model.User;
+import Hotel.management.hotel.management.Exception.UserDontExistExp;
 import Hotel.management.hotel.management.Repositoriy.HotelRepositories;
 import Hotel.management.hotel.management.Repositoriy.UserRepositories;
 import jakarta.transaction.Transactional;
@@ -40,6 +41,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public DetailHotelDTO getHotelById(Long id) {
         Optional<Hotel> byId = hotelRepositories.findById(id);
+
         return byId.map(this::mapToDTO).orElse(null);
     }
 
@@ -57,7 +59,10 @@ public class HotelServiceImpl implements HotelService {
     public void createHotel(CreateHotelDTO dto, String email) {
         Optional<User> byEmail = userRepositories.findByEmail(email);
         Hotel hotel = mapToCreate(dto);
-        hotel.setUser(byEmail.orElse(new User()));
+        if (byEmail.isEmpty()) {
+            throw new UserDontExistExp("User dont exist");
+        }
+        hotel.setUser(byEmail.get());
         hotelRepositories.save(hotel);
     }
 
@@ -82,6 +87,9 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<DetailHotelDTO> getAllByManager(String name) {
         Optional<User> byEmail = userRepositories.findByEmail(name);
+        if (byEmail.isEmpty()) {
+            throw  new UserDontExistExp("User dont exist");
+        }
       return   hotelRepositories.findAllByUser(byEmail.get()).stream().map(this::mapToDTO).toList();
     }
 }

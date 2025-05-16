@@ -9,15 +9,22 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 public class Reservation extends BaseEntity{
+    @Column(nullable = false)
     private Long userId;
+
+    @Column(nullable = false)
     private Long roomId;
 
+    @Column(nullable = false)
     private LocalDate checkInDate;
+
+    @Column(nullable = false)
     private LocalDate checkOutDate;
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
+    @Column(nullable = false)
     private BigDecimal totalPrice;
 
     private LocalDateTime createdAt = LocalDateTime.now();

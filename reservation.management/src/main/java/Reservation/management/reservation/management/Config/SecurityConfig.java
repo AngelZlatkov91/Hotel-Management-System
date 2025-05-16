@@ -20,9 +20,7 @@ public class SecurityConfig {
                     .cors(Customizer.withDefaults())
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth
-//                            .requestMatchers("/api/rooms/**").permitAll()
-//                            .requestMatchers("/api/manager/rooms/**").hasRole("MANAGER")
-//                            .requestMatchers("/api/receptionist/**").hasRole("RECEPTIONIST")
+                            .requestMatchers("/api/receptionist/**").hasRole("RECEPTIONIST")
 
                             .anyRequest().authenticated()
                     )

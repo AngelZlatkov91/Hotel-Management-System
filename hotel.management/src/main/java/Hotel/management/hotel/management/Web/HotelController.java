@@ -4,7 +4,6 @@ package Hotel.management.hotel.management.Web;
 import Hotel.management.hotel.management.Entitys.DTO.DetailHotelDTO;
 import Hotel.management.hotel.management.Service.HotelService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 public class Reservation extends BaseEntity{
-    @Column(nullable = false)
-    private Long userId;
 
     @Column(nullable = false)
     private Long roomId;
@@ -26,9 +24,10 @@ public class Reservation extends BaseEntity{
 
     @Column(nullable = false)
     private BigDecimal totalPrice;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     private User user;
@@ -92,11 +91,11 @@ public class Reservation extends BaseEntity{
         this.updatedAt = updatedAt;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

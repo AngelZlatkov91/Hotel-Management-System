@@ -1,5 +1,4 @@
 package Reservation.management.reservation.management.Web;
-
 import Reservation.management.reservation.management.Exceptions.ErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 

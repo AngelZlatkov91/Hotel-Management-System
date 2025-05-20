@@ -1,15 +1,11 @@
 package Reservation.management.reservation.management.Models.DTO;
-
 import Reservation.management.reservation.management.Models.Entitys.ReservationStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CreateReservationDTO {
 
-    private Long userId;
+
     private Long roomId;
 
     private LocalDate checkInDate;
@@ -63,11 +59,4 @@ public class CreateReservationDTO {
         this.totalPrice = totalPrice;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }
